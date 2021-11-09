@@ -71,13 +71,20 @@ def btnClick() :
     global btnVar
     if (btnVar == 0) :
         print("btnVar = ", btnVar)
-        infoFrame.pack()
+        infoFrame.pack_forget()
+        motorFrame.pack_forget()
         btnVar += 1
     elif (btnVar == 1) :
+        print("btnVar = ", btnVar)
+        infoFrame.pack()
+        btnVar += 1
+    elif (btnVar == 2) :
         print("btnVar =", btnVar)
         infoFrame.pack_forget()
+        motorFrame.pack()
         btnVar += 1
     else :
+        motorFrame.pack_forget()
         btnVar = 0
         btnClick()
 
