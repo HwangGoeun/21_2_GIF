@@ -11,8 +11,6 @@ FACE = 0xf4 #얼굴 인식 part
 uart_header = [0x55, 0x66] #유아트 header
 ser = serial.Serial ("/dev/ttyS0", 115200)
 
-#모터 상승 버튼
-
 # Motor 상승
 def motor_up() :
     send_data = uart_header
