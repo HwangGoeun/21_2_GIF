@@ -40,6 +40,32 @@ ser = serial.Serial ("/dev/ttyS0", 115200) # 여기서 막혔습니다 !!!!
 # 함수 코드
 ################################################################################################
 '''
+Frame 전환용 함수
+'''
+
+def btnClick() :
+    global btnVar
+    if (btnVar == 0) :
+        print("btnVar = ", btnVar)
+        infoFrame.pack_forget()
+        motorFrame.pack_forget()
+        btnVar += 1
+    elif (btnVar == 1) :
+        print("btnVar = ", btnVar)
+        infoFrame.pack()
+        btnVar += 1
+    elif (btnVar == 2) :
+        print("btnVar =", btnVar)
+        infoFrame.pack_forget()
+        motorFrame.pack()
+        btnVar += 1
+    else :
+        motorFrame.pack_forget()
+        btnVar = 0
+        btnClick()
+
+################################################################################################
+'''
 infoFrame 관련 함수
 '''
 
@@ -65,28 +91,6 @@ def c23_check() :
     
 def c24_check() :
     print("checkVar24 =",checkVar24.get())
-
-# pack 테스트용 함수
-def btnClick() :
-    global btnVar
-    if (btnVar == 0) :
-        print("btnVar = ", btnVar)
-        infoFrame.pack_forget()
-        motorFrame.pack_forget()
-        btnVar += 1
-    elif (btnVar == 1) :
-        print("btnVar = ", btnVar)
-        infoFrame.pack()
-        btnVar += 1
-    elif (btnVar == 2) :
-        print("btnVar =", btnVar)
-        infoFrame.pack_forget()
-        motorFrame.pack()
-        btnVar += 1
-    else :
-        motorFrame.pack_forget()
-        btnVar = 0
-        btnClick()
 
 ################################################################################################
 '''
