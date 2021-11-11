@@ -1,19 +1,3 @@
-################################################################################################
-'''
-코드 작성은 정의 -> 함수 -> GUI 순으로 진행했습니다.
-모든 코드는 통신 -> 옷 정보 설정 -> 모터 순으로 작성했습니다.
-
-################################################################################################
-# 이렇게 쓰면 한 주제에 대한 코드가 시작되고
-################################################################################################
-
-################################################################################################
-################################################################################################
-이렇게 두 줄이면 그 주제에 대한 코드가 끝납니다.
-
-'''
-################################################################################################
-
 from tkinter import *
 import serial
 from time import sleep
@@ -31,7 +15,7 @@ faceF = 0x01 #얼굴 인식 실패
 FACE = 0xf4 #얼굴 인식 part
 
 uart_header = [0x55, 0x66] #유아트 header
-ser = serial.Serial ("/dev/ttyS0", 115200) # 여기서 막혔습니다 !!!!
+# ser = serial.Serial ("/dev/ttyS0", 115200) # 여기서 막혔습니다 !!!!
 
 ################################################################################################
 ################################################################################################
@@ -42,7 +26,22 @@ ser = serial.Serial ("/dev/ttyS0", 115200) # 여기서 막혔습니다 !!!!
 '''
 Frame 전환용 함수
 '''
+def go_startFrame() :
+    infoFrame.pack_forget()
+    motorFrame.pack_forget()
+    startFrame.pack()
 
+def go_infoFrame() :
+    startFrame.pack_forget()
+    motorFrame.pack_forget()
+    infoFrame.pack()
+
+def go_motorFrame() :
+    startFrame.pack_forget()
+    infoFrame.pack_forget()
+    motorFrame.pack()
+
+'''
 def btnClick() :
     global btnVar
     if (btnVar == 0) :
@@ -63,7 +62,7 @@ def btnClick() :
         motorFrame.pack_forget()
         btnVar = 0
         btnClick()
-
+'''
 ################################################################################################
 '''
 infoFrame 관련 함수
@@ -115,7 +114,6 @@ def motor_up() :
 ################################################################################################
 # GUI 코드
 ################################################################################################
-
 '''
 GUI 화면 설정
 '''
@@ -123,7 +121,20 @@ GUI 화면 설정
 win = Tk() # GUI 생성 
 win.title("21_2_GIF_moving2") #상단의 타이틀 지정
 win.geometry("640x640") # 크기 설정 (640x640)
+################################################################################################
+'''
+startFrame(시작 화면) 코드
+'''
 
+startFrame = Frame(win) #시작 화면 설정 화면 프레임
+
+addBtn = Button(startFrame, text = "옷 정보 추가하기", command = go_infoFrame)
+recBtn = Button(startFrame, text = "옷 추천 받기", command = go_motorFrame)
+
+addBtn.pack()
+recBtn.pack()
+
+startFrame.pack()
 ################################################################################################
 '''
 infoFrame(옷 정보 설정 화면) 코드
@@ -170,11 +181,6 @@ c22.pack()
 c23.pack()
 c24.pack()
 
-# 테스트용 버튼
-btnVar = 0
-infoBtn = Button(win, text = "click", command = btnClick)
-infoBtn.pack()
-
 ################################################################################################
 '''
 motorFrame(모터 작동 스위치 화면) 코드 
@@ -185,11 +191,23 @@ motorFrame = Frame(win) # 옷 정보 설정 화면 프레임
 
 
 # 버튼 생성
-btn = Button(motorFrame, text = "UP", command = motor_up)
-btn.config(width=20, height=2)
-btn.pack(anchor = "center")
+mtBtn = Button(motorFrame, text = "UP", command = motor_up)
+mtBtn.config(width=20, height=2)
+
+mtBtn.pack(anchor = "center")
 
 ################################################################################################
+
+'''
+# 테스트용 버튼
+btnVar = 0
+infoBtn = Button(win, text = "click", command = btnClick)
+infoBtn.pack()
+'''
+
+btn = Button(win, text = "go to home", command = go_startFrame)
+btn.config(height = 3)
+btn.pack(side = BOTTOM)
 
 win.mainloop() # GUI가 보이고 종료될때까지 실행함
 
