@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from tkinter import *
 import serial
 from time import sleep
@@ -130,6 +133,8 @@ startFrame = Frame(win) #시작 화면 설정 화면 프레임
 
 addBtn = Button(startFrame, text = "옷 정보 추가하기", command = go_infoFrame)
 recBtn = Button(startFrame, text = "옷 추천 받기", command = go_motorFrame)
+addBtn.config(height = 2)
+recBtn.config(height=2)
 
 addBtn.pack()
 recBtn.pack()
