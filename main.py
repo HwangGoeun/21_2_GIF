@@ -38,6 +38,7 @@ def dis_clockFrame() :
     infoFrame.pack_forget()
     startFrame.pack_forget()
     motorFrame.pack_forget()
+    satisFrame.pack_forget()
     clockFrame.pack()
 
     face_check = input("input face_check : ")
@@ -51,6 +52,7 @@ def go_startFrame() :
     clockFrame.pack_forget()
     infoFrame.pack_forget()
     motorFrame.pack_forget()
+    satisFrame.pack_forget()
     btn.pack_forget()
     clockBtn.pack(side = BOTTOM)
     startFrame.pack()
@@ -60,6 +62,7 @@ def go_infoFrame() :
     clockFrame.pack_forget()
     startFrame.pack_forget()
     motorFrame.pack_forget()
+    satisFrame.pack_forget()
     btn.pack(side = BOTTOM)
     infoFrame.pack()
 
@@ -68,8 +71,19 @@ def go_motorFrame() :
     clockFrame.pack_forget()
     startFrame.pack_forget()
     infoFrame.pack_forget()
+    satisFrame.pack_forget()
     btn.pack(side = BOTTOM)
     motorFrame.pack()
+
+def go_satisFrame() :
+    clockBtn.pack_forget()
+    clockFrame.pack_forget()
+    startFrame.pack_forget()
+    infoFrame.pack_forget()
+    motorFrame.pack_forget()
+    btn.pack_forget()
+    satisFrame.pack()
+
 ################################################################################################
 '''
 clockFrame 관련 함수
@@ -126,7 +140,7 @@ def motor_up() :
     print(send_data)
     send_data = []
     '''
-    print("모터 상승 버튼 시 작동되는 함수입니다. 아직 시리얼 통신은 안 해봤어요")
+    go_satisFrame()
 
 ################################################################################################
 ################################################################################################
@@ -219,6 +233,29 @@ mtBtn = Button(motorFrame, text = "UP", command = motor_up)
 mtBtn.config(width=30, height=5)
 
 mtBtn.grid(pady = 20)
+
+################################################################################################
+'''
+satisFrame(만족도 조사 화면) 코드
+'''
+
+#프레임 설정
+satisFrame = Frame(win)
+
+satisLabel = Label(satisFrame, text = "추천된 코디가 만족스러우셨습니까?")
+satisLabel.grid(row=0, column=0, columnspan=2, pady=50)
+
+yBtn = Button(satisFrame, text = "Yes")
+yBtn.config(width = 20, height = 5)
+nBtn = Button(satisFrame, text = "No")
+nBtn.config(width = 20, height = 5)
+
+yBtn.grid(row=1, column=0, padx=10)
+nBtn.grid(row=1, column=1, padx=10)
+
+satisFrame.pack()
+
+################################################################################################
 '''
 startFrame 가는 버튼
 '''
