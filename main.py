@@ -3,6 +3,7 @@ from tkinter import *
 import serial
 from time import sleep
 import time
+import datetime
 
 face_check = 'N'
 
@@ -78,6 +79,11 @@ def clock() :
    live_T = time.strftime("%H:%M:%S")
    clock_width.config(text=live_T)
    clock_width.after(200, clock) # .after(지연시간{ms}, 실행함수)
+
+def date() :
+    live_D = datetime.date.fromtimestamp(time.time())
+    date_width.config(text = live_D)
+    date_width.after(200, date)
 ################################################################################################
 '''
 infoFrame 관련 함수
@@ -134,7 +140,7 @@ GUI 화면 설정
 
 win = Tk() # GUI 생성 
 win.title("21_2_GIF_moving2") #상단의 타이틀 지정
-win.geometry("500x200") # 크기 설정
+win.geometry("500x300") # 크기 설정
 ################################################################################################
 '''
 startFrame(시작 화면) 코드
@@ -239,11 +245,20 @@ clockFrame(시계 화면) 코드
 clockFrame = Frame(win)
 clockFrame.pack()
 
-txt_width = Label(clockFrame, text="현재 시간")
-txt_width.pack()
+txt_D_width = Label(clockFrame, text="현재 날짜")
+txt_D_width.pack()
+
+date_width = Label(clockFrame, font = ("Times", 30, "bold"), bd = 5)
+date_width.config(width=15, height=2)
+date_width.pack()
+
+date()
+
+txt_T_width = Label(clockFrame, text="현재 시간")
+txt_T_width.pack()
 
 clock_width = Label(clockFrame, font=("Times",60,"bold"), bd=8)
-clock_width.config(width=20, height=3)
+clock_width.config(width=20, height=1)
 clock_width.pack()
 
 clock()
