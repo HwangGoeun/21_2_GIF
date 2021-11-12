@@ -1,7 +1,7 @@
 
 from tkinter import *
 import serial
-from time import sleep
+from time import sleep, thread_time_ns
 import time
 import datetime
 
@@ -39,6 +39,7 @@ def dis_clockFrame() :
     startFrame.pack_forget()
     motorFrame.pack_forget()
     satisFrame.pack_forget()
+    thanksFrame.pack_forget()
     clockFrame.pack()
 
     face_check = input("input face_check : ")
@@ -54,6 +55,7 @@ def go_startFrame() :
     motorFrame.pack_forget()
     satisFrame.pack_forget()
     btn.pack_forget()
+    thanksFrame.pack_forget()
     clockBtn.pack(side = BOTTOM)
     startFrame.pack()
 
@@ -63,26 +65,44 @@ def go_infoFrame() :
     startFrame.pack_forget()
     motorFrame.pack_forget()
     satisFrame.pack_forget()
+    thanksFrame.pack_forget()
     btn.pack(side = BOTTOM)
     infoFrame.pack()
 
 def go_motorFrame() :
-    clockBtn.pack_forget()
     clockFrame.pack_forget()
     startFrame.pack_forget()
     infoFrame.pack_forget()
     satisFrame.pack_forget()
+    thanksFrame.pack_forget()
+    clockBtn.pack_forget()
     btn.pack(side = BOTTOM)
     motorFrame.pack()
 
 def go_satisFrame() :
-    clockBtn.pack_forget()
     clockFrame.pack_forget()
     startFrame.pack_forget()
     infoFrame.pack_forget()
     motorFrame.pack_forget()
+    thanksFrame.pack_forget()
+    clockBtn.pack_forget()
     btn.pack_forget()
     satisFrame.pack()
+
+def go_thanksFrame() :
+    clockFrame.pack_forget()
+    startFrame.pack_forget()
+    infoFrame.pack_forget()
+    motorFrame.pack_forget()
+    satisFrame.pack_forget()
+    clockBtn.pack_forget()
+    btn.pack_forget()
+    thanksFrame.pack()
+    delay_time()
+
+def delay_time() :
+    time.sleep(3)
+    dis_clockFrame()
 
 ################################################################################################
 '''
@@ -98,6 +118,7 @@ def date() :
     live_D = datetime.date.fromtimestamp(time.time())
     date_width.config(text = live_D)
     date_width.after(200, date)
+
 ################################################################################################
 '''
 infoFrame 관련 함수
@@ -245,15 +266,27 @@ satisFrame = Frame(win)
 satisLabel = Label(satisFrame, text = "추천된 코디가 만족스러우셨습니까?")
 satisLabel.grid(row=0, column=0, columnspan=2, pady=50)
 
-yBtn = Button(satisFrame, text = "Yes")
+yBtn = Button(satisFrame, text = "Yes", command = go_thanksFrame)
 yBtn.config(width = 20, height = 5)
-nBtn = Button(satisFrame, text = "No")
+nBtn = Button(satisFrame, text = "No", command = go_thanksFrame)
 nBtn.config(width = 20, height = 5)
 
 yBtn.grid(row=1, column=0, padx=10)
 nBtn.grid(row=1, column=1, padx=10)
 
 satisFrame.pack()
+
+################################################################################################
+'''
+thanksFrame()
+'''
+
+thanksFrame = Frame(win)
+
+thanksLabel = Label(thanksFrame, text = "감사합니다.", font=30, bd=10)
+thanksLabel.grid(pady=50)
+
+thanksFrame.pack()
 
 ################################################################################################
 '''
@@ -270,7 +303,7 @@ clockFrame 가는 버튼
 '''
 
 clockBtn = Button(win, text = "QUITE", command = dis_clockFrame)
-clockBtn.config(width = 20, height = 3)
+clockBtn.config(width = 20, height = 2)
 
 clockBtn.pack(side = BOTTOM)
 
@@ -280,9 +313,8 @@ clockFrame(시계 화면) 코드
 '''
 
 clockFrame = Frame(win)
-clockFrame.pack()
 
-txt_D_width = Label(clockFrame, text="현재 날짜")
+txt_D_width = Label(clockFrame, text="\n\n현재 날짜")
 txt_D_width.pack()
 
 date_width = Label(clockFrame, font = ("Times", 30, "bold"), bd = 5)
