@@ -34,10 +34,10 @@ Frame 전환용 함수
 '''
 
 def dis_clockFrame() :
-    clockFrame.pack()
     startFrame.pack_forget()
     infoFrame.pack_forget()
     motorFrame.pack_forget()
+    clockFrame.pack()
 
     camera = input("input camera : ")
     if(camera == 1) :
@@ -46,22 +46,22 @@ def dis_clockFrame() :
         dis_clockFrame()
 
 def go_startFrame() :
-    startFrame.pack()
     dis_clockFrame.pack_forget()
     infoFrame.pack_forget()
     motorFrame.pack_forget()
+    startFrame.pack()
 
 def go_infoFrame() :
-    infoFrame.pack()
     dis_clockFrame.pack_forget()
     startFrame.pack_forget()
     motorFrame.pack_forget()
+    infoFrame.pack()
 
 def go_motorFrame() :
-    motorFrame.pack()
     dis_clockFrame.pack_forget()
     startFrame.pack_forget()
     infoFrame.pack_forget()
+    motorFrame.pack()
 
 '''
 def btnClick() :
@@ -154,20 +154,6 @@ win.title("21_2_GIF_moving2") #상단의 타이틀 지정
 win.geometry("640x640") # 크기 설정 (640x640)
 ################################################################################################
 '''
-clockFrame(시계 화면) 코드
-'''
-
-clockFrame = Frame(win)
-
-clock_width = Label(clockFrame, font=("Times",24,"bold"), bd=8)
-clock_width.pack()
-
-# clock()
-
-clockFrame.pack()
-dis_clockFrame()
-################################################################################################
-'''
 startFrame(시작 화면) 코드
 '''
 
@@ -243,6 +229,19 @@ mtBtn.config(width=20, height=2)
 
 mtBtn.pack(anchor = "center")
 
+################################################################################################
+'''
+clockFrame(시계 화면) 코드
+'''
+
+clockFrame = Frame(win)
+
+clock_width = Label(clockFrame, font=("Times",24,"bold"), bd=8)
+clock_width.pack()
+
+clock()
+
+dis_clockFrame()
 ################################################################################################
 '''
 # 테스트용 버튼
