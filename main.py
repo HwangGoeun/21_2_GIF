@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 from tkinter import *
 import serial
@@ -32,36 +30,35 @@ uart_header = [0x55, 0x66] #유아트 header
 '''
 Frame 전환용 함수
 '''
-
 def dis_clockFrame() :
-    clockFrame.pack()
-    startFrame.pack_forget()
     infoFrame.pack_forget()
+    startFrame.pack_forget()
     motorFrame.pack_forget()
+    clockFrame.pack()
 
     camera = input("input camera : ")
-    if(camera == 1) :
+    if(camera == '1') :
         go_startFrame()
     else :
         dis_clockFrame()
 
 def go_startFrame() :
-    startFrame.pack()
-    dis_clockFrame.pack_forget()
+    clockFrame.pack_forget()
     infoFrame.pack_forget()
     motorFrame.pack_forget()
+    startFrame.pack()
 
 def go_infoFrame() :
-    infoFrame.pack()
-    dis_clockFrame.pack_forget()
+    clockFrame.pack_forget()
     startFrame.pack_forget()
     motorFrame.pack_forget()
+    infoFrame.pack()
 
 def go_motorFrame() :
-    motorFrame.pack()
-    dis_clockFrame.pack_forget()
+    clockFrame.pack_forget()
     startFrame.pack_forget()
     infoFrame.pack_forget()
+    motorFrame.pack()
 
 '''
 def btnClick() :
@@ -90,7 +87,7 @@ def btnClick() :
 clockFrame 관련 함수
 '''
 
-def clock(): # 현재 시간 표시 / 반복
+def clock() :
    live_T = time.strftime("%H:%M:%S")
    clock_width.config(text=live_T)
    clock_width.after(200, clock) # .after(지연시간{ms}, 실행함수)
@@ -154,20 +151,6 @@ win.title("21_2_GIF_moving2") #상단의 타이틀 지정
 win.geometry("640x640") # 크기 설정 (640x640)
 ################################################################################################
 '''
-clockFrame(시계 화면) 코드
-'''
-
-clockFrame = Frame(win)
-
-clock_width = Label(clockFrame, font=("Times",24,"bold"), bd=8)
-clock_width.pack()
-
-# clock()
-
-clockFrame.pack()
-dis_clockFrame()
-################################################################################################
-'''
 startFrame(시작 화면) 코드
 '''
 
@@ -175,11 +158,11 @@ startFrame = Frame(win) #시작 화면 설정 화면 프레임
 
 addBtn = Button(startFrame, text = "옷 정보 추가하기", command = go_infoFrame)
 recBtn = Button(startFrame, text = "옷 추천 받기", command = go_motorFrame)
-addBtn.config(width = 50, height = 3)
-recBtn.config(width = 50, height=2)
+addBtn.config(height = 2)
+recBtn.config(height=2)
 
-addBtn.grid(pady = 100)
-recBtn.grid(pady = 10)
+addBtn.pack()
+recBtn.pack()
 
 startFrame.pack()
 ################################################################################################
@@ -236,7 +219,6 @@ motorFrame(모터 작동 스위치 화면) 코드
 #프레임 설정
 motorFrame = Frame(win) # 옷 정보 설정 화면 프레임
 
-
 # 버튼 생성
 mtBtn = Button(motorFrame, text = "UP", command = motor_up)
 mtBtn.config(width=20, height=2)
@@ -244,7 +226,28 @@ mtBtn.config(width=20, height=2)
 mtBtn.pack(anchor = "center")
 
 ################################################################################################
+'''
+clockFrame(시계 화면) 코드
+'''
 
+txt_frame = Frame(win)
+txt_frame.pack()
+
+txt_width = Label(txt_frame, text="현재 시간")
+txt_width.pack()
+
+clockFrame = Frame(win)
+clockFrame.pack()
+
+clock_width = Label(clockFrame, font=("Times",60,"bold"), bd=8)
+clock_width.config(width=20, height=3)
+clock_width.pack()
+
+clock()
+
+clockFrame.pack()
+dis_clockFrame()
+################################################################################################
 '''
 # 테스트용 버튼
 btnVar = 0
