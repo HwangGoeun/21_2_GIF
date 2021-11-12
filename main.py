@@ -34,7 +34,7 @@ Frame 전환용 함수
 '''
 
 def dis_clockFrame() :
-#    clockFrame.pack()
+    clockFrame.pack()
     startFrame.pack_forget()
     infoFrame.pack_forget()
     motorFrame.pack_forget()
@@ -162,7 +162,7 @@ clockFrame = Frame(win)
 clock_width = Label(clockFrame, font=("Times",24,"bold"), bd=8)
 clock_width.pack()
 
-clock()
+# clock()
 
 clockFrame.pack()
 dis_clockFrame()
