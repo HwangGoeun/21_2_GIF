@@ -4,7 +4,7 @@ import serial
 from time import sleep
 import time
 
-camera = 0
+face_check = 'N'
 
 ################################################################################################
 # 통신 관련 코드
@@ -30,58 +30,45 @@ uart_header = [0x55, 0x66] #유아트 header
 '''
 Frame 전환용 함수
 '''
+
 def dis_clockFrame() :
+    clockBtn.pack_forget()
+    btn.pack_forget()
     infoFrame.pack_forget()
     startFrame.pack_forget()
     motorFrame.pack_forget()
     clockFrame.pack()
 
-    camera = input("input camera : ")
-    if(camera == '1') :
+    face_check = input("input face_check : ")
+    if(face_check == 'Y') :
         go_startFrame()
     else :
         dis_clockFrame()
 
 def go_startFrame() :
+    clockBtn.pack_forget()
     clockFrame.pack_forget()
     infoFrame.pack_forget()
     motorFrame.pack_forget()
+    btn.pack_forget()
+    clockBtn.pack(side = BOTTOM)
     startFrame.pack()
 
 def go_infoFrame() :
+    clockBtn.pack_forget()
     clockFrame.pack_forget()
     startFrame.pack_forget()
     motorFrame.pack_forget()
+    btn.pack(side = BOTTOM)
     infoFrame.pack()
 
 def go_motorFrame() :
+    clockBtn.pack_forget()
     clockFrame.pack_forget()
     startFrame.pack_forget()
     infoFrame.pack_forget()
+    btn.pack(side = BOTTOM)
     motorFrame.pack()
-
-'''
-def btnClick() :
-    global btnVar
-    if (btnVar == 0) :
-        print("btnVar = ", btnVar)
-        infoFrame.pack_forget()
-        motorFrame.pack_forget()
-        btnVar += 1
-    elif (btnVar == 1) :
-        print("btnVar = ", btnVar)
-        infoFrame.pack()
-        btnVar += 1
-    elif (btnVar == 2) :
-        print("btnVar =", btnVar)
-        infoFrame.pack_forget()
-        motorFrame.pack()
-        btnVar += 1
-    else :
-        motorFrame.pack_forget()
-        btnVar = 0
-        btnClick()
-'''
 ################################################################################################
 '''
 clockFrame 관련 함수
@@ -99,7 +86,6 @@ infoFrame 관련 함수
 # 체크 박스 선택 여부 확인
 def c11_check() :
     print("checkVar11 =", checkVar11.get())
-    #if(checkVar1 == 0)
 
 def c12_check() :
     print("checkVar12 =",checkVar12.get())
@@ -158,11 +144,11 @@ startFrame = Frame(win) #시작 화면 설정 화면 프레임
 
 addBtn = Button(startFrame, text = "옷 정보 추가하기", command = go_infoFrame)
 recBtn = Button(startFrame, text = "옷 추천 받기", command = go_motorFrame)
-addBtn.config(height = 2)
-recBtn.config(height=2)
+addBtn.config(width = 50, height = 5)
+recBtn.config(width = 50, height = 5)
 
-addBtn.pack()
-recBtn.pack()
+addBtn.grid(pady=100)
+recBtn.grid(pady=10)
 
 startFrame.pack()
 ################################################################################################
@@ -184,7 +170,6 @@ checkVar21 = IntVar() # 더울 때
 checkVar22 = IntVar() # 추울 때
 checkVar23 = IntVar() # 보통 때
 checkVar24 = IntVar() # 비 올 때
-
 
 # 체크 박스 출력
 # 계절 설정 체크 박스
@@ -221,23 +206,37 @@ motorFrame = Frame(win) # 옷 정보 설정 화면 프레임
 
 # 버튼 생성
 mtBtn = Button(motorFrame, text = "UP", command = motor_up)
-mtBtn.config(width=20, height=2)
+mtBtn.config(width=30, height=5)
 
-mtBtn.pack(anchor = "center")
+mtBtn.grid(pady = 250)
+'''
+startFrame 가는 버튼
+'''
+
+btn = Button(win, text = "go to home", command = go_startFrame)
+btn.config(width = 20, height = 3)
+btn.pack(side = BOTTOM)
+
+################################################################################################
+'''
+clockFrame 가는 버튼
+'''
+
+clockBtn = Button(win, text = "QUITE", command = dis_clockFrame)
+clockBtn.config(width = 20, height = 3)
+
+clockBtn.pack(side = BOTTOM)
 
 ################################################################################################
 '''
 clockFrame(시계 화면) 코드
 '''
 
-txt_frame = Frame(win)
-txt_frame.pack()
-
-txt_width = Label(txt_frame, text="현재 시간")
-txt_width.pack()
-
 clockFrame = Frame(win)
 clockFrame.pack()
+
+txt_width = Label(clockFrame, text="현재 시간")
+txt_width.pack()
 
 clock_width = Label(clockFrame, font=("Times",60,"bold"), bd=8)
 clock_width.config(width=20, height=3)
@@ -248,16 +247,6 @@ clock()
 clockFrame.pack()
 dis_clockFrame()
 ################################################################################################
-'''
-# 테스트용 버튼
-btnVar = 0
-infoBtn = Button(win, text = "click", command = btnClick)
-infoBtn.pack()
-'''
-
-btn = Button(win, text = "go to home", command = go_startFrame)
-btn.config(height = 3)
-btn.pack(side = BOTTOM)
 
 win.mainloop() # GUI가 보이고 종료될때까지 실행함
 
