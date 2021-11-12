@@ -183,8 +183,11 @@ startFrame(시작 화면) 코드
 
 startFrame = Frame(win) #시작 화면 설정 화면 프레임
 
-addBtn = Button(startFrame, text = "옷 정보 추가하기", command = go_infoFrame)
-recBtn = Button(startFrame, text = "옷 추천 받기", command = go_motorFrame)
+lab = Label(startFrame, text = "\n\n")
+lab.grid()
+
+addBtn = Button(startFrame, text = "ADDING CLOTHES", command = go_infoFrame)
+recBtn = Button(startFrame, text = "GET RECOMMENDATIONS", command = go_motorFrame)
 addBtn.config(width = 50, height = 3)
 recBtn.config(width = 50, height = 3)
 
@@ -215,10 +218,10 @@ checkVar24 = IntVar() # 비 올 때
 
 # 체크 박스 출력
 # 계절 설정 체크 박스
-lab1 = Label(seasonFrame, text = "무슨 계절에 입나요?")
-c11 = Checkbutton(seasonFrame, text = "봄, 가을", variable = checkVar11, command = c11_check)
-c12 = Checkbutton(seasonFrame, text = "여름", variable = checkVar12, command = c12_check)
-c13 = Checkbutton(seasonFrame, text = "겨울", variable = checkVar13, command = c13_check)
+lab1 = Label(seasonFrame, text = "\n\nSELLECT SEASON")
+c11 = Checkbutton(seasonFrame, text = "SPRING, FALL", variable = checkVar11, command = c11_check)
+c12 = Checkbutton(seasonFrame, text = "SUMMER", variable = checkVar12, command = c12_check)
+c13 = Checkbutton(seasonFrame, text = "WINTER", variable = checkVar13, command = c13_check)
 
 lab1.pack()
 c11.pack()
@@ -226,11 +229,11 @@ c12.pack()
 c13.pack()
 
 # 날씨 설정 체크 박스
-lab2 = Label(weatherFrame, text = "어떨 때 입고 싶은가요?")
-c21 = Checkbutton(weatherFrame, text = "더울 때", variable = checkVar21, command = c21_check)
-c22 = Checkbutton(weatherFrame, text = "추울 때", variable = checkVar22, command = c22_check)
-c23 = Checkbutton(weatherFrame, text = "보통 때", variable = checkVar23, command = c23_check)
-c24 = Checkbutton(weatherFrame, text = "비 올 때", variable = checkVar24, command = c24_check)
+lab2 = Label(weatherFrame, text = "\n\nSELECT WEATHER")
+c21 = Checkbutton(weatherFrame, text = "HOT", variable = checkVar21, command = c21_check)
+c22 = Checkbutton(weatherFrame, text = "COLD", variable = checkVar22, command = c22_check)
+c23 = Checkbutton(weatherFrame, text = "DEFAULT", variable = checkVar23, command = c23_check)
+c24 = Checkbutton(weatherFrame, text = "RAIN", variable = checkVar24, command = c24_check)
 
 lab2.pack()
 c21.pack()
@@ -251,9 +254,9 @@ motorFrame = Frame(win) # 옷 정보 설정 화면 프레임
 
 # 버튼 생성
 mtBtn = Button(motorFrame, text = "UP", command = motor_up)
-mtBtn.config(width=30, height=5)
+mtBtn.config(width=30, height=4)
 
-mtBtn.grid(pady = 20)
+mtBtn.grid(pady = 50)
 
 ################################################################################################
 '''
@@ -263,7 +266,7 @@ satisFrame(만족도 조사 화면) 코드
 #프레임 설정
 satisFrame = Frame(win)
 
-satisLabel = Label(satisFrame, text = "추천된 코디가 만족스러우셨습니까?")
+satisLabel = Label(satisFrame, text = "Were you satisfied with the recommendation?")
 satisLabel.grid(row=0, column=0, columnspan=2, pady=50)
 
 yBtn = Button(satisFrame, text = "Yes", command = go_thanksFrame)
@@ -283,7 +286,7 @@ thanksFrame()
 
 thanksFrame = Frame(win)
 
-thanksLabel = Label(thanksFrame, text = "감사합니다.", font=30, bd=10)
+thanksLabel = Label(thanksFrame, text = "Thank you", font=30, bd=10)
 thanksLabel.grid(pady=50)
 
 thanksFrame.pack()
@@ -293,7 +296,7 @@ thanksFrame.pack()
 startFrame 가는 버튼
 '''
 
-btn = Button(win, text = "go to home", command = go_startFrame)
+btn = Button(win, text = "Home", command = go_startFrame)
 btn.config(width = 20, height = 3)
 btn.pack(side = BOTTOM)
 
@@ -314,7 +317,7 @@ clockFrame(시계 화면) 코드
 
 clockFrame = Frame(win)
 
-txt_D_width = Label(clockFrame, text="\n\n현재 날짜")
+txt_D_width = Label(clockFrame, text="\n\nToday is...")
 txt_D_width.pack()
 
 date_width = Label(clockFrame, font = ("Times", 30, "bold"), bd = 5)
@@ -323,7 +326,7 @@ date_width.pack()
 
 date()
 
-txt_T_width = Label(clockFrame, text="현재 시간")
+txt_T_width = Label(clockFrame, text="The current time is...")
 txt_T_width.pack()
 
 clock_width = Label(clockFrame, font=("Times",60,"bold"), bd=8)
