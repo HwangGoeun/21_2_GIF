@@ -19,7 +19,10 @@ faceF = 0x01 #얼굴 인식 실패
 
 FACE = 0xf4 #얼굴 인식 part
 
-uart_header = [0x55, 0x66] #유아트 header
+BUTTON = 0x66
+OFF = 0x02
+
+uart_header = [0x61, 0x62] #유아트 header
 ser = serial.Serial ("/dev/ttyS0", 115200) # 여기서 막혔습니다 !!!!
 
 ################################################################################################
@@ -80,6 +83,13 @@ def go_motorFrame() :
     motorFrame.pack()
 
 def go_satisFrame() :
+    uart_header = [0x61,0x62] #uart
+    send_data = uart_header
+    send_data.append(BUTTON)
+    send_data.append(OFF)
+    ser.write(send_data)
+    print(send_data)
+
     clockFrame.pack_forget()
     startFrame.pack_forget()
     infoFrame.pack_forget()
