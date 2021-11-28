@@ -35,6 +35,7 @@ ser = serial.Serial ("/dev/ttyS0", 115200) # 여기서 막혔습니다 !!!!
 Frame 전환용 함수
 '''
 
+# 시계 화면 보이기
 def dis_clockFrame() :
     clockBtn.pack_forget()
     btn.pack_forget()
@@ -51,6 +52,7 @@ def dis_clockFrame() :
     else :
         dis_clockFrame()
 
+# 선택 화면 보이기
 def go_startFrame() :
     clockBtn.pack_forget()
     clockFrame.pack_forget()
@@ -62,6 +64,7 @@ def go_startFrame() :
     clockBtn.pack(side = BOTTOM)
     startFrame.pack()
 
+# 옷 정보 설정 페이지 보이기
 def go_infoFrame() :
     clockBtn.pack_forget()
     clockFrame.pack_forget()
@@ -72,6 +75,7 @@ def go_infoFrame() :
     btn.pack(side = BOTTOM)
     infoFrame.pack()
 
+# 모터 제어 페이지 보이기
 def go_motorFrame() :
     clockFrame.pack_forget()
     startFrame.pack_forget()
@@ -82,6 +86,7 @@ def go_motorFrame() :
     btn.pack(side = BOTTOM)
     motorFrame.pack()
 
+# 만족도 조사 화면 보이기
 def go_satisFrame() :
     uart_header = [0x61,0x62] #uart
     send_data = uart_header
@@ -99,6 +104,7 @@ def go_satisFrame() :
     btn.pack_forget()
     satisFrame.pack()
 
+# 감사 인사 페이지 보이기
 def go_thanksFrame() :
     clockFrame.pack_forget()
     startFrame.pack_forget()
@@ -110,6 +116,7 @@ def go_thanksFrame() :
     thanksFrame.pack()
     delay_time()
 
+# 시간 딜레이 함수
 def delay_time() :
     time.sleep(3)
     dis_clockFrame()
